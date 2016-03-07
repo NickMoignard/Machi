@@ -36,11 +36,11 @@ class CreateAccountViewController: UIViewController {
                 if error == nil {
                     FIREBASE_REF.authUser(email, password: password) { // log user in with firebase
                         (error, authData) in
-                        if authData ==  nil {   // check for response object
+                        if authData !=  nil {   // check for response object
                             print("account created")
                             
                             // save unique identifier into NSUserDefaults
-                            NSUserDefaults.standardUserDefaults().setValue(authData, forKey: "uid")
+                            NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: "uid")
                             
                             //  dismiss the modal view
                             self.dismissViewControllerAnimated(true, completion: nil)

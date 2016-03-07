@@ -13,20 +13,21 @@ class LoginViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var logoutButton: UIButton!
+
     
     // MARK: - Protocol Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
 
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if NSUserDefaults.standardUserDefaults().valueForKey("uid") != nil && CURRENT_USER.authData != nil {    // check for unique identifier in user defaults and then check for firebase authData
-            self.logoutButton.hidden = false
+        if NSUserDefaults.standardUserDefaults().valueForKey("uid") != nil && CURRENT_USER.authData != nil {
+            print("account created and logged in")
+            self.dismissViewControllerAnimated(false, completion: nil)
         }
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +53,10 @@ class LoginViewController: UIViewController {
                     
                     // store unique identifier from firebase in the user defaults
                     NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: "uid")
+                    
+                    //move to the main application
+                    self.dismissViewControllerAnimated(false, completion: nil)
+                    
                 } else {    // user not found in database -> Alert User
                 
                     let alert = UIAlertController(title: "Error", message: "\(error).", preferredStyle: .Alert)
@@ -68,28 +73,4 @@ class LoginViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-
-    @IBAction func logoutAction(sender: AnyObject) {
-        
-        // logout user with firebase
-        CURRENT_USER.unauth()
-        
-        //remove authentification data from NSUserDefaults
-        NSUserDefaults.standardUserDefaults().setValue(nil, forKey: "uid")
-        
-        //Hide Logout button
-        self.logoutButton.hidden = true
-    }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
