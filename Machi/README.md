@@ -39,7 +39,12 @@ GENERAL INFORMATION
   
     Supporting files: (Wireframes, Moodboard etc etc)
 
-        <GOOGLE DRIVE SHARING THINGO>
+        https://drive.google.com/folderview?id=0B2l2Qz2slBuxanJDcTdCWVF2aEk&usp=sharing
+
+        SHAREABLE & EDITABLE LINK!
+        Be careful with whom you share this link with
+
+        
 
 
 GETTING STARTED
